@@ -15,5 +15,4 @@
 apply from: '../build.common.gradle'
 dependencies {
     compileOnly project(path: ':EasyFTCLib')
-
 }

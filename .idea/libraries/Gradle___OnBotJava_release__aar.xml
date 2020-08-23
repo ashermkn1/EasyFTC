@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: :OnBotJava-release:@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c014b7f6b2735332af79769dc1e4d2af/OnBotJava-release/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c014b7f6b2735332af79769dc1e4d2af/OnBotJava-release/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c014b7f6b2735332af79769dc1e4d2af/OnBotJava-release/jars/libs/javac.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a038cdda3270ed2f2f0a5e47a2ff21ee/OnBotJava-release/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a038cdda3270ed2f2f0a5e47a2ff21ee/OnBotJava-release/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a038cdda3270ed2f2f0a5e47a2ff21ee/OnBotJava-release/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a038cdda3270ed2f2f0a5e47a2ff21ee/OnBotJava-release/jars/libs/javac.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Blocks/Blocks.iml" filepath="$PROJECT_DIR$/.idea/modules/Blocks/Blocks.iml" group="EasyFTC/Blocks" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/EasyFTC.iml" filepath="$PROJECT_DIR$/.idea/modules/EasyFTC.iml" group="EasyFTC" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EasyFTCLib/EasyFTCLib.iml" filepath="$PROJECT_DIR$/.idea/modules/EasyFTCLib/EasyFTCLib.iml" group="EasyFTC/EasyFTCLib" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ftcCommon/FtcCommon.iml" filepath="$PROJECT_DIR$/.idea/modules/ftcCommon/FtcCommon.iml" group="EasyFTC/FtcCommon" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/FtcRobotController/FtcRobotController.iml" filepath="$PROJECT_DIR$/.idea/modules/FtcRobotController/FtcRobotController.iml" group="EasyFTC/FtcRobotController" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Hardware/Hardware.iml" filepath="$PROJECT_DIR$/.idea/modules/Hardware/Hardware.iml" group="EasyFTC/Hardware" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Inspection/Inspection.iml" filepath="$PROJECT_DIR$/.idea/modules/Inspection/Inspection.iml" group="EasyFTC/Inspection" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OpenRC/OpenRC.iml" filepath="$PROJECT_DIR$/.idea/modules/OpenRC/OpenRC.iml" group="EasyFTC/OpenRC" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RobotCore/RobotCore.iml" filepath="$PROJECT_DIR$/.idea/modules/RobotCore/RobotCore.iml" group="EasyFTC/RobotCore" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RobotServer/RobotServer.iml" filepath="$PROJECT_DIR$/.idea/modules/RobotServer/RobotServer.iml" group="EasyFTC/RobotServer" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/TeamCode/TeamCode.iml" filepath="$PROJECT_DIR$/.idea/modules/TeamCode/TeamCode.iml" group="EasyFTC/TeamCode" />
     </modules>
   </component>
