@@ -14,5 +14,6 @@
 // Include common definitions from above.
 apply from: '../build.common.gradle'
 dependencies {
-    compileOnly project(path: ':EasyFTCLib')
+    implementation project(path: ':EasyFTCLib')
+    //compileOnly project(path: ':EasyFTCLib')
 }
