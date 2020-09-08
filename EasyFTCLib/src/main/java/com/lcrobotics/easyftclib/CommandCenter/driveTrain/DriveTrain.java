@@ -2,8 +2,10 @@ package com.lcrobotics.easyftclib.CommandCenter.driveTrain;
 
 import com.lcrobotics.easyftclib.tools.ArrayTools;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
 
 public class DriveTrain {
+
     private WheelType wheelType;
     private DriveMotor[] motors;
 
@@ -14,7 +16,7 @@ public class DriveTrain {
     }
 
     // Creates a 4 wheel drive train
-    DriveTrain(WheelType wheelType, DcMotor frontLeftMotor, DcMotor frontRightMotor, DcMotor BackLeftMotor, DcMotor BackRightMotor){
+    public DriveTrain(WheelType wheelType, DcMotor frontLeftMotor, DcMotor frontRightMotor, DcMotor BackLeftMotor, DcMotor BackRightMotor){
         // Stores what type of wheel (i.e mechanum, omni, etc
         this.wheelType = wheelType;
         // stores the motors in our DriveMotor[], this allows us to know what they are attached to
@@ -25,6 +27,16 @@ public class DriveTrain {
                 new DriveMotor(BackRightMotor, WheelPosition.BACK_RIGHT)
         };
     }
+
+    public DriveTrain(WheelType wheelType, DriveMotor frontLeftMotor, DriveMotor frontRightMotor, DriveMotor backLeftMotor, DriveMotor backRightMotor){
+        // Stores what type of wheel (i.e mechanum, omni, etc
+        this.wheelType = wheelType;
+
+        // stores the motors in our DriveMotor[], this allows us to know what they are attached to
+        this.motors = new DriveMotor[] { frontLeftMotor,  frontRightMotor,
+                                         backLeftMotor,   backRightMotor};
+    }
+
 
     // Given an array of DcMotors and their motor positions reset drive train
     public void setMotors(DcMotor[] motors, WheelPosition[] motorPos) throws DriveTrainException {
@@ -61,6 +73,19 @@ public class DriveTrain {
             }
         }
 
+    }
+
+
+    public void setPower(float x, float y) {
+        float frontRightDrivePow = Range.clip(x - y, -1, 1);
+        float backRightDrivePow = Range.clip(x - y, -1, 1);
+        float backLeftDrivePow = Range.clip(x + y, -1, 1);
+        float frontLeftDrivePow = Range.clip(x + y, -1, 1);
+
+        motors[0].motor.setPower(frontLeftDrivePow);
+        motors[1].motor.setPower(frontRightDrivePow);
+        motors[2].motor.setPower(backLeftDrivePow);
+        motors[3].motor.setPower(backRightDrivePow);
     }
 }
 
