@@ -20,7 +20,15 @@ public class ZeroRingAuto extends SuperOp {
 
         switch (status) {
             case START:
-
+                break;
+            case MOVEGOAL:
+                break;
+            case SHOOTRINGS:
+                break;
+            case PARK:
+                break;
+            case STOP:
+                break;
         }
     }
 }

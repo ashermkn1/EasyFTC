@@ -5,8 +5,7 @@ import com.lcrobotics.easyftclib.CommandCenter.driveTrain.DriveMotor;
 import com.lcrobotics.easyftclib.CommandCenter.driveTrain.DriveTrain;
 import com.lcrobotics.easyftclib.CommandCenter.driveTrain.WheelPosition;
 import com.lcrobotics.easyftclib.CommandCenter.driveTrain.WheelType;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.Range;
+
 
 public class motorControllerTest extends AdvancedOpMode {
     DriveMotor frontRightDrive;
@@ -28,11 +27,6 @@ public class motorControllerTest extends AdvancedOpMode {
 
     @Override
     public void loop() {
-        float x = gamepad1.left_stick_x;
-        float y = gamepad1.left_stick_y;
-
-
-
-        driveTrain.setPower(x, y);
+        driveTrain.setPower(gamepad1.right_stick_x, -gamepad1.left_stick_y);
     }
 }

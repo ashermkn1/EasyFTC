@@ -31,9 +31,9 @@
     <output-test url="file://$MODULE_DIR$/../../../FtcCommon/build/intermediates/javac/debugUnitTest/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../ftcCommon">
-      <sourceFolder url="file://$MODULE_DIR$/../../../ftcCommon/build/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcCommon/build/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../FtcCommon/build/generated/aidl_source_output_dir/debug/out" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../ftcCommon/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../FtcCommon/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../FtcCommon/build/generated/renderscript_source_output_dir/debug/out" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../FtcCommon/build/generated/res/rs/debug" type="java-resource" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../FtcCommon/build/generated/ap_generated_sources/debugAndroidTest/out" isTestSource="true" generated="true" />
@@ -84,7 +84,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../FtcCommon/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../FtcCommon/src/test/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../FtcCommon/src/test/shaders" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../ftcCommon/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../FtcCommon/build" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 26 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
