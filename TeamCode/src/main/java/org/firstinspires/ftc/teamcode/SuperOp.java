@@ -14,8 +14,6 @@ public abstract class SuperOp extends OpMode {
 
     public DriveTrain wheels = null;
 
-    public enum AUTOCONFIG {ZERORING, ONERING, FOURRING};
-
     public enum AUTOSTATUS {START, MOVEGOAL, SHOOTRINGS, PARK, STOP};
 
     @Override
