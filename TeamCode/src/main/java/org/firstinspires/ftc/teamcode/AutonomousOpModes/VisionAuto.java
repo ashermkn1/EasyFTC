@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.AutonomousOpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptTensorFlowObjectDetectionWebcam;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -30,7 +31,7 @@ public class VisionAuto extends SuperOp {
     private VuforiaLocalizer vuforia;
 
     private TFObjectDetector tfod;
-
+    private ElapsedTime timer;
     private int numRings;
     private AUTOSTATUS status = AUTOSTATUS.START;
 
@@ -40,18 +41,19 @@ public class VisionAuto extends SuperOp {
         // initialize vuforia
         initVuforia();
         // initialize tfod
-        if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
+        /*if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
             initTfod();
         } else {
             telemetry.addData("Sorry!", "This device is not compatible with TFOD");
-        }
+        } */
         // add logging for motor powers of the drive train
         telemetry.addData("Drive Train: ", wheels);
 
         // activate the object detection
         if (tfod != null) {
-            tfod.activate();
+            //tfod.activate();
         }
+        timer = new ElapsedTime();
     }
 
     @Override
@@ -71,12 +73,17 @@ public class VisionAuto extends SuperOp {
                     numRings = updatedRecognitions.size();
                     status = AUTOSTATUS.MOVEGOAL;
                 }
+                timer.reset();
                 break;
             // move goal to defined zone
             case MOVEGOAL:
                 // drive from start position to A
-
-                if (numRings == A) {
+                if (timer.seconds() > 2) {
+                    status = AUTOSTATUS.STOP;
+                    break;
+                }
+                wheels.setPower(0, 0.5, 0);
+                /*if (numRings == A) {
                     // place wobble goal in zone
 
                     status = AUTOSTATUS.SHOOTRINGS;
@@ -98,7 +105,7 @@ public class VisionAuto extends SuperOp {
 
                 // place wobble goal
 
-                status = AUTOSTATUS.SHOOTRINGS;
+                status = AUTOSTATUS.SHOOTRINGS;*/
                 break;
 
             case SHOOTRINGS:
@@ -124,8 +131,8 @@ public class VisionAuto extends SuperOp {
 
     /**
      * Taken from {@link ConceptTensorFlowObjectDetectionWebcam}
+     * initializes our vuforia object
      */
-
     private void initVuforia() {
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
@@ -143,6 +150,7 @@ public class VisionAuto extends SuperOp {
 
     /**
      * Taken from {@link ConceptTensorFlowObjectDetectionWebcam}
+     * initializes our tf object detection
      */
     private void initTfod() {
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
