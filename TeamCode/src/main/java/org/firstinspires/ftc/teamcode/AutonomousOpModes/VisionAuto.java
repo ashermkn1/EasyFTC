@@ -22,9 +22,9 @@ public class VisionAuto extends SuperOp {
 
     private static final int A = 0;
     private static final int B = 1;
-
-    //private static final int C = 4;
-
+    private static final int C = 4;
+    private static final double[] times = {3.0, 3.5, 0, 0, 4.0};
+    private static double driveTime;
 
     private final static String VUFORIA_KEY = "ARgYuCf/////AAABmUYfc1+dVEQsgUBCPA2kCAFRmuTRB/XUfAJzLsRyFDRg6uMMjj6EXM8YNiY5l3oTw83H+PKgfF46gctdzrln2nnVXMebpgN9ULy1cOfdSsPk0hwSZqzcY0LWCj+rPPrZ3JyQT7gf2aw7bo8ZvWedWB7skuGIjg+9cyTJdDyXmXrQ8Bo4r4siTFNTVFxg21OH/Gd8wrVJF4RqjE+kcez3MzcnE2EPCqWTNixSge5yLg+tN87/R/dMPzqHWvmjE6F6J/7/sahPt7FQ9G6tYWnV1impzZsH7T/JT6pGr2SALwHdaNjBGbYY76ZfvAxixEdob9g6qMBhKOyLg6HTP9VzRZ06ksUhErmR2K2LSkyjxBBz";
 
@@ -32,7 +32,6 @@ public class VisionAuto extends SuperOp {
 
     private TFObjectDetector tfod;
     private ElapsedTime timer;
-    private int numRings;
     private AUTOSTATUS status = AUTOSTATUS.START;
 
     @Override
@@ -41,17 +40,17 @@ public class VisionAuto extends SuperOp {
         // initialize vuforia
         initVuforia();
         // initialize tfod
-        /*if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
+        if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
             initTfod();
         } else {
             telemetry.addData("Sorry!", "This device is not compatible with TFOD");
-        } */
+        }
         // add logging for motor powers of the drive train
         telemetry.addData("Drive Train: ", wheels);
 
         // activate the object detection
         if (tfod != null) {
-            //tfod.activate();
+            tfod.activate();
         }
         timer = new ElapsedTime();
     }
@@ -70,43 +69,37 @@ public class VisionAuto extends SuperOp {
                 if (updatedRecognitions != null) {
                     // get amount of rings
                     telemetry.addData("# Object Detected", updatedRecognitions.size());
-                    numRings = updatedRecognitions.size();
-                    status = AUTOSTATUS.MOVEGOAL;
+                    // get time to drive to configuration zone
+                    driveTime = times[updatedRecognitions.size()];
+                    status = AUTOSTATUS.MOVETOZONE;
+                    wheels.setPower(0, 1, 0);
                 }
                 timer.reset();
                 break;
             // move goal to defined zone
-            case MOVEGOAL:
-                // drive from start position to A
-                if (timer.seconds() > 2) {
-                    status = AUTOSTATUS.STOP;
-                    break;
+            case MOVETOZONE:
+                if (timer.seconds() >= driveTime) {
+                    wheels.setPower(0, 0, 0);
+                    status = AUTOSTATUS.DROPGOAL;
                 }
-                wheels.setPower(0, 0.5, 0);
-                /*if (numRings == A) {
-                    // place wobble goal in zone
-
-                    status = AUTOSTATUS.SHOOTRINGS;
-                    break;
-                }
-
-                // drive from A to B
-
-                if (numRings == B) {
-                    // rotate robot 180 degrees and place wobble goal in zone
-
-                    status = AUTOSTATUS.SHOOTRINGS;
-                    // rotate back 180 degrees
-
-                    break;
-                }
-
-                // drive from B to C
-
-                // place wobble goal
-
-                status = AUTOSTATUS.SHOOTRINGS;*/
                 break;
+
+            case DROPGOAL:
+                // drop goal
+                // TBD on how we do this
+                status = AUTOSTATUS.MOVEFROMZONE;
+                wheels.setPower(0, -1, 0);
+                timer.reset();
+                break;
+
+            // move from the zone back to the start
+            case MOVEFROMZONE:
+                if (timer.seconds() >= driveTime) {
+                    wheels.setPower(0, 0, 0);
+                    status = AUTOSTATUS.SHOOTRINGS;
+                }
+                break;
+
 
             case SHOOTRINGS:
                 // TBD
