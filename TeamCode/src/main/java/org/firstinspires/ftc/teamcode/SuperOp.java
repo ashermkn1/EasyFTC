@@ -14,7 +14,7 @@ public abstract class SuperOp extends OpMode {
 
     public DriveTrain wheels = null;
 
-    public enum AUTOSTATUS {START, MOVETOZONE, DROPGOAL, MOVEFROMZONE, SHOOTRINGS, PARK, STOP};
+    public enum AUTOSTATUS {START, MOVETOZONE, DROPGOAL, MOVEFROMZONE, SHOOTRINGS, PARK, STOP}
 
     @Override
     public void init() {

@@ -20,17 +20,22 @@ public class VisionAuto extends SuperOp {
     private static final String TFOD_MODEL_ASSET = "Ring.tflite";
     private static final String LABEL_FIRST_ELEMENT = "Ring";
 
+    // number of rings for each configuration zone
     private static final int A = 0;
     private static final int B = 1;
     private static final int C = 4;
+
+    // drive times to get to each zone
     private static final double[] times = {3.0, 3.5, 0, 0, 4.0};
     private static double driveTime;
+    private static int numRings;
 
     private final static String VUFORIA_KEY = "ARgYuCf/////AAABmUYfc1+dVEQsgUBCPA2kCAFRmuTRB/XUfAJzLsRyFDRg6uMMjj6EXM8YNiY5l3oTw83H+PKgfF46gctdzrln2nnVXMebpgN9ULy1cOfdSsPk0hwSZqzcY0LWCj+rPPrZ3JyQT7gf2aw7bo8ZvWedWB7skuGIjg+9cyTJdDyXmXrQ8Bo4r4siTFNTVFxg21OH/Gd8wrVJF4RqjE+kcez3MzcnE2EPCqWTNixSge5yLg+tN87/R/dMPzqHWvmjE6F6J/7/sahPt7FQ9G6tYWnV1impzZsH7T/JT6pGr2SALwHdaNjBGbYY76ZfvAxixEdob9g6qMBhKOyLg6HTP9VzRZ06ksUhErmR2K2LSkyjxBBz";
 
     private VuforiaLocalizer vuforia;
 
     private TFObjectDetector tfod;
+    // timer for various motor applications
     private ElapsedTime timer;
     private AUTOSTATUS status = AUTOSTATUS.START;
 
@@ -68,9 +73,10 @@ public class VisionAuto extends SuperOp {
                 // make sure objects were detected
                 if (updatedRecognitions != null) {
                     // get amount of rings
-                    telemetry.addData("# Object Detected", updatedRecognitions.size());
+                    telemetry.addData("# Objects Detected: ", updatedRecognitions.size());
                     // get time to drive to configuration zone
-                    driveTime = times[updatedRecognitions.size()];
+                    numRings = updatedRecognitions.size();
+                    driveTime = times[numRings];
                     status = AUTOSTATUS.MOVETOZONE;
                     wheels.setPower(0, 1, 0);
                 }
@@ -84,33 +90,40 @@ public class VisionAuto extends SuperOp {
                 }
                 break;
 
+            // drop the wobble goal in the zone
             case DROPGOAL:
-                // drop goal
-                // TBD on how we do this
+                if (numRings == B) {
+                    // rotate 180 degrees
+                    // drop goal
+                    // rotate 180 degrees back
+                } else {
+                    // drop goal
+                    // TBD on how we do this
+                }
                 status = AUTOSTATUS.MOVEFROMZONE;
                 wheels.setPower(0, -1, 0);
                 timer.reset();
                 break;
 
-            // move from the zone back to the start
+            // move from the zone back to the start or back to midline to shoot rings
             case MOVEFROMZONE:
-                if (timer.seconds() >= driveTime) {
+                if (timer.seconds() >= driveTime /* - times[A] */) {
                     wheels.setPower(0, 0, 0);
                     status = AUTOSTATUS.SHOOTRINGS;
                 }
                 break;
 
-
+            // shoot rings
             case SHOOTRINGS:
                 // TBD
                 status = AUTOSTATUS.PARK;
                 break;
 
+            // drive so robot is over midline, possibly using NavImages on the field
             case PARK:
-                // drive so robot is over midline, possibly using NavImages on the field
-
+                status = AUTOSTATUS.STOP;
                 break;
-
+            // stop robot and get ready for teleop
             case STOP:
                 // shutdown tfod object
                 if (tfod != null) {
