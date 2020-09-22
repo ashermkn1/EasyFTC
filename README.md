@@ -2,6 +2,7 @@
 
 EasyFTC is a library for teams participating in FTC which aims to simplify and expedite the process of building opmodes. We provide you with a series of tools that enable you and your team to create more sophisticated opmodes than would normally be made. 
 
+Current FTC SDK repository is [here](https://github.com/FIRST-Tech-Challenge/SKYSTONE)
 
 ## Getting Started
 
