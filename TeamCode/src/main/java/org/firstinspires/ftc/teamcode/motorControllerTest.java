@@ -28,6 +28,6 @@ public class motorControllerTest extends AdvancedOpMode {
 
     @Override
     public void loop() {
-        driveTrain.setPower(gamepad1.right_stick_x, -gamepad1.left_stick_y);
+        driveTrain.setPower(-gamepad1.right_stick_x, gamepad1.left_stick_y);
     }
 }

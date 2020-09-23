@@ -13,6 +13,6 @@ public class Test2WheelGamePad extends Test2Wheel {
     @Override
     public void loop() {
         // drive
-        wheels.setPower(gamepad1.right_stick_x, -gamepad1.left_stick_y);
+        wheels.setPower(gamepad1.right_stick_x, gamepad1.left_stick_y);
     }
 }
