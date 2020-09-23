@@ -78,7 +78,7 @@ public class DriveTrain {
     }
 
 
-    public void setPower(double turn, double drive) {
+    public void  setPower(double turn, double drive) {
         double rightDrivePow = Range.clip(drive - turn, -1, 1);
 
         double leftDrivePow = Range.clip(drive + turn, -1, 1);
@@ -87,9 +87,9 @@ public class DriveTrain {
             motors[0].motor.setPower(leftDrivePow);
             motors[1].motor.setPower(rightDrivePow);
         } else {
-            motors[0].motor.setPower(leftDrivePow);
-            motors[1].motor.setPower(leftDrivePow);
-            motors[2].motor.setPower(rightDrivePow);
+            motors[0].motor.setPower(-leftDrivePow);
+            motors[1].motor.setPower(rightDrivePow);
+            motors[2].motor.setPower(-leftDrivePow);
             motors[3].motor.setPower(rightDrivePow);
         }
     }
@@ -102,8 +102,8 @@ public class DriveTrain {
 
         motors[0].motor.setPower(frontLeftPow);
         motors[1].motor.setPower(frontRightPow);
-        motors[2].motor.setPower(backLeftPow);
-        motors[3].motor.setPower(backRightPow);
+        motors[2].motor.setPower(-backLeftPow);
+        motors[3].motor.setPower(-0.8 * backRightPow);
 
     }
 
